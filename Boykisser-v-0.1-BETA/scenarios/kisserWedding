@@ -1,0 +1,90 @@
+const { Op } = require('sequelize');
+const Soulmates = require('../models/Soulmates'); // Path to your Soulmates model
+
+module.exports = async (interaction, user, target, eventType, kisser1, kisser2) => {
+  // Debugging: Log user and target objects
+
+  let targetKisser;
+
+    userKisser = interaction.options.getString('kisser1');
+    targetKisser = kisser2;
+
+    console.log("Datekisser Event Detected");
+    console.log("User Kisser 1:", userKisser);
+    console.log("User Kisser 2:", targetKisser);
+
+    /*if (!user.kisserXP[userKisser] || !user.kisserXP[targetKisser]) {
+      return interaction.channel.send("One or both selected kissers do not exist in your collection! 💔");
+    }*/
+ 
+
+    console.log("Datestar Event Detected");
+    console.log("User Kisser:", userKisser);
+    console.log("Target Kisser:", targetKisser);
+
+    if (!userKisser) {
+      return interaction.channel.send(`${interaction.user.username}, you need to set a favorite kisser before you can get married! 💔`);
+    }
+    if (!targetKisser) {
+      return interaction.channel.send(`${target?.username || "The target user"} does not have a favorite kisser set! 💔`);
+    }
+
+
+  // Validate if either kisser is already in a relationship
+  const existingSoulmate = await Soulmates.findOne({
+    where: {
+      [Op.or]: [
+        { 'soulmate1.userId': user.userId, 'soulmate1.kisserName': userKisser },
+        { 'soulmate2.userId': user.userId, 'soulmate2.kisserName': userKisser },
+        { 'soulmate1.userId': user.userId, 'soulmate1.kisserName': targetKisser },
+        { 'soulmate2.userId': user.userId, 'soulmate2.kisserName': targetKisser },
+      ],
+    },
+  });
+
+  if (existingSoulmate) {
+    return interaction.channel.send("One of the kissers is already married! 💔");
+  }
+
+  // Prompt confirmation
+  await interaction.channel.send(
+    `💍 ${interaction.user.username}, do you want to marry your **${userKisser}** to **${targetKisser}**? Both must type 'yes' to confirm!`
+  );
+
+  const filter = (response) =>
+    response.author.id === user.userId &&
+    response.content.toLowerCase() === 'yes';
+
+  const collector = interaction.channel.createMessageCollector({ filter, max: 1, time: 60000 });
+
+  let confirmations = 0;
+
+  // In your event handler, inside the collector's 'collect' event:
+collector.on('collect', async (response) => {
+  confirmations += 1;
+  await interaction.channel.send(`${response.author.username} has confirmed!`);
+  if (confirmations === 1) {
+    // Correct the assignment of kisser names in the Soulmates model
+    await Soulmates.create({
+      soulmate1: {
+        userId: user.userId,
+        kisserName: userKisser, // User's kisser
+      },
+      soulmate2: {
+        userId: target.userId, // Target's userId, assuming you're marrying them to the target user
+        kisserName: targetKisser, // Target's kisser
+      },
+    });
+
+    await interaction.channel.send(
+      `🎉 Congratulations! **${userKisser}** and **${targetKisser}** are now soulmates! ❤️`
+    );
+  }
+});
+
+  collector.on('end', (collected) => {
+    if (confirmations < 1) {
+      interaction.channel.send("The wedding didn't go through. Both parties must agree!");
+    }
+  });
+};
