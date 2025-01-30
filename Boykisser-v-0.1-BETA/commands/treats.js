@@ -21,7 +21,7 @@ module.exports = {
       }).then(([user]) => user); // Extract user instance from array
 
       const now = new Date();
-      const cooldownTime = 1 * 60 * 1000; // change the first number to adjust minutes
+      const cooldownTime = 36000000; // hours * mins * secs * milliseconds
 
       // Check if user has used the command recently
       if (user.lastTreatReset && now - user.lastTreatReset < cooldownTime) {

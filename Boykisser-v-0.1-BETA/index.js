@@ -6,7 +6,7 @@ const { Routes } = require('discord-api-types/v9');
 const path = require('path');
 const mongoose = require('mongoose');
 const Guild = require('./models/guild');
-const buyAccessoryCommand = require('../Boykisser v 0.1/commands/buyAccessory'); // Adjust the path if needed
+const buyAccessoryCommand = require('../Boykisser-v-0.1-BETA/commands/buyAccessory'); // Adjust the path if needed
 
 //const { clientId, guildId, token } = require('./config.json');
 

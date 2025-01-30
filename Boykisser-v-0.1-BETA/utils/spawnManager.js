@@ -28,70 +28,70 @@ function getSpawnDetails(spawnType) {
                 filepath: '../images/boykissers/BoykisserBase.png',
                 description: 'ooooh a kissy boy',
                 color: '#30ffc1',
-                treatsNeeded: 1
+                treatsNeeded: 4
             };
         case 'Girlkisser':
             return {
                 filepath: '../images/boykissers/GirlkisserBase.png',
                 description: 'oooh a kissy girl',
                 color: '#740fd9',
-                treatsNeeded: 1
+                treatsNeeded: 4
             };
         case 'Carminekisser':
               return {
                   filepath: '../images/boykissers/CarminekisserBase.png',
                   description: 'a kiss with a carmine shade :3',
                   color: '#740fd9',
-                  treatsNeeded: 1
+                  treatsNeeded: 9
               };    
         case 'Cirruskisser':
               return {
                   filepath: '../images/boykissers/CirruskisserBase.png',
                   description: 'ooh a very hot kisser :3',
                   color: '#740fd9',
-                  treatsNeeded: 1
+                  treatsNeeded: 19
               };
         case 'Cloudkisser':
               return {
                   filepath: '../images/boykissers/CloudkisserBase.png',
                   description: 'kissing among cozy clouds uwu',
                   color: '#740fd9',
-                  treatsNeeded: 1
+                  treatsNeeded: 19
               };
         case 'Fluffykisser':
               return {
                   filepath: '../images/boykissers/FluffykisserBase.png',
                   description: 'oooh big fluffy kisses!',
                   color: '#740fd9',
-                  treatsNeeded: 1
+                  treatsNeeded: 14
               };
         case 'Gingerkisser':
               return {
                   filepath: '../images/boykissers/GingerkisserBase.png',
                   description: 'this kisser has a pink motorbike',
                   color: '#740fd9',
-                  treatsNeeded: 1
+                  treatsNeeded: 9
               };    
         case 'Glovekisser':
               return {
                   filepath: '../images/boykissers/GlovekisserBase.png',
                   description: `oooh who's that? a kissy girl, that's who :3`,
                   color: '#740fd9',
-                  treatsNeeded: 1
+                  treatsNeeded: 24
               };    
         case 'Scarnkisser':
               return {
                   filepath: '../images/boykissers/ScarnkisserBase.png',
                   description: `ooh this kisser's kisses are on fire!`,
                   color: '#740fd9',
-                  treatsNeeded: 1
+                  treatsNeeded: 14
               };    
         case 'Fieldkisser':
               return {
                   filepath: '../images/boykissers/FieldkisserBase.png',
                   description: `He is a stinker`,
                   color: '#740fd9',
-                  treatsNeeded: 1
+                  treatsNeeded: 9
               };    
             }     
 }

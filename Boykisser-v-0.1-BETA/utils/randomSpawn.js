@@ -18,7 +18,7 @@ function getRandomInterval(min, max) {
  * @param {string[]} validReactions Array of valid reaction emojis.
  * @param {number} timeLimit Time limit in milliseconds.
  */
-async function waitForReactionsWithImmediateFeedback(message, validReactions, spawnType, timeLimit = 5000) {
+async function waitForReactionsWithImmediateFeedback(message, validReactions, spawnType, timeLimit = 120000) {
   const reactedUsers = new Set(); // Track users who already reacted
 
   const collector = message.createReactionCollector({
@@ -94,7 +94,7 @@ async function setupGuildSpawn(client, guildConfig) {
 
     // Wait for reactions and provide immediate feedback
     await waitForReactionsWithImmediateFeedback(sentMessage, [emoji], spawnType, 5000);
-  }, getRandomInterval(15000, 30000)); // Random interval between 1 and 5 minutes
+  }, getRandomInterval(1800000, 3600000)); // Random interval between 1 and 5 minutes
 }
 
 exports.randomSpawn = async function (client) {
